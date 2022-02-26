@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import VideoCapture from './components/utils/videoCapture'
+import VideoCapture from '../components/videoCapture'
 export default function Home() {
   return (
     <div>
