@@ -1,5 +1,7 @@
 import {useRef, useState, useEffect} from 'react'
 
+import { Button } from '@chakra-ui/react';
+
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
 import {calculateDominantColor, getRGBsums} from '../utils/colorAnalyzer';
@@ -71,8 +73,8 @@ export default function VideoCapture() {
         <p>{analyzingColor ?  dominantColor : ""}</p>
         {readyToAnalyze ?
         <div> 
-            <button disabled={analyzingColor} onClick={record}>Analyze</button>
-            <button disabled={!analyzingColor} onClick={stopRecord}>stop Analyzing</button>
+            <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
+            <Button disabled={!analyzingColor} onClick={stopRecord}>stop Analyzing</Button>
         </div> :
         <p>Loading webcam...</p>
         }
