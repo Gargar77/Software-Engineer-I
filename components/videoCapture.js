@@ -26,7 +26,7 @@ export default function VideoCapture() {
         setRecording(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => getVideoFrameData(imageCapture), 1000);
+        let id = setInterval(() => getVideoFrameData(imageCapture), 500);
         setIntervalId(id);
 
     };
