@@ -12,9 +12,10 @@ const videoConstraints = {
 
 export default function VideoCapture() {
     const webcamRef = useRef(null);
-    const [recording, setRecording] = useState(false);
+    const [analyzingColor, setAnalyzingColor] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
     const [rgbSums, setRgbSums] = useState([0,0,0]);
+    const [readyToAnalyze, setReadyToAnalyze] = useState(false);
 
     const getVideoFrameData = async (imageCapture) => {
         let imageBitmap = await imageCapture.grabFrame();
@@ -23,7 +24,7 @@ export default function VideoCapture() {
     }
 
     const record = async () => {
-        setRecording(true);
+        setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
         let id = setInterval(() => getVideoFrameData(imageCapture), 500);
@@ -33,7 +34,7 @@ export default function VideoCapture() {
     const stopRecord = () => {
         clearInterval(intervalId);
         setIntervalId(false);
-        setRecording(false);
+        setAnalyzingColor(false);
     }
 
     return (
@@ -42,10 +43,16 @@ export default function VideoCapture() {
             videoConstraints={videoConstraints}
             audio={false}
             ref={webcamRef}
+            onUserMedia={() => setReadyToAnalyze(true)}
             />
-        <p>{recording ? calculateDominantColor(rgbSums) : ""}</p>
-        <button disabled={recording} onClick={record}>record</button>
-        <button disabled={!recording} onClick={stopRecord}>stop</button>
+        <p>{analyzingColor ? calculateDominantColor(rgbSums) : ""}</p>
+        {readyToAnalyze ?
+        <div> 
+            <button disabled={analyzingColor} onClick={record}>Analyze</button>
+            <button disabled={!analyzingColor} onClick={stopRecord}>stop Analyzing</button>
+        </div> :
+        <p>Loading webcam...</p>
+        }
         </>
     )
 }
