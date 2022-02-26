@@ -1,5 +1,5 @@
 import Head from 'next/head'
-
+import VideoCapture from './components/utils/videoCapture'
 export default function Home() {
   return (
     <div>
@@ -9,6 +9,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <VideoCapture/>
       </main>
       <footer>
      
