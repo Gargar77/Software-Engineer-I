@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
 
 import Head from 'next/head'
+import {Container, Box} from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+
 import VideoCapture from '../components/videoCapture'
+
+
 
 export default function Home() {
   const [isRecording,setIsRecording] = useState(false);
@@ -12,16 +17,18 @@ export default function Home() {
         <title>Synesthesia</title>
         <meta name="description" content="synethesia simulator" />
       </Head>
-
-      <main>
-        {isRecording ? 
-        <div>
-          <VideoCapture/>
-          <button onClick={()=> setIsRecording(false)}>Stop Video</button>
-        </div> :
-        <button onClick={()=> setIsRecording(true)}>Start</button>
+        {isRecording ?
+        <Container centerContent borderRadius="1g"  marginTop={12}>
+          <Box height={300} width={200}><VideoCapture/></Box>
+          <Button onClick={()=> setIsRecording(false)}>Stop Video</Button>
+        </Container>
+         :
+         <Container centerContent borderRadius="1g"  marginTop={12}>
+           <Box height={300} width={200}></Box>
+           <Button onClick={()=> setIsRecording(true)}>Start</Button>
+         </Container>
+         
         }
-      </main>
       <footer>
      
       </footer>
