@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Head from 'next/head'
 import VideoCapture from '../components/videoCapture'
+
 export default function Home() {
   const [isRecording,setIsRecording] = useState(false);
+
   return (
     <div>
       <Head>
