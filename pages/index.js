@@ -1,6 +1,9 @@
+import { useState } from 'react'
+
 import Head from 'next/head'
 import VideoCapture from '../components/videoCapture'
 export default function Home() {
+  const [isRecording,setIsRecording] = useState(false);
   return (
     <div>
       <Head>
@@ -9,7 +12,13 @@ export default function Home() {
       </Head>
 
       <main>
-        <VideoCapture/>
+        {isRecording ? 
+        <div>
+          <VideoCapture/>
+          <button onClick={()=> setIsRecording(false)}>Stop Video</button>
+        </div> :
+        <button onClick={()=> setIsRecording(true)}>Start</button>
+        }
       </main>
       <footer>
      
