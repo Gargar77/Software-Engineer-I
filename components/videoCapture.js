@@ -8,7 +8,7 @@ import {calculateDominantColor, getRGBsums} from '../utils/colorAnalyzer';
 import frequencyMap from '../frequencyMap';
 const videoConstraints = {
     width: 200,
-    height: 200,
+    height: 250,
     facingMode: "user"
   };
 
