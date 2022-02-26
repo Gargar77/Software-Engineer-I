@@ -1,7 +1,7 @@
 import {useRef, useState, useEffect} from 'react'
 
 import Webcam from  'react-webcam'
-import getImageData from '../utils/imageDataScraper';
+import getImageData from '../utils/imageAnalyzer'
 import {calculateDominantColor, getRGBsums} from '../utils/colorAnalyzer';
 import frequencyMap from '../frequencyMap';
 const videoConstraints = {
@@ -37,9 +37,8 @@ export default function VideoCapture() {
         source.start();
     };
 
-    const getVideoFrameData = async (imageCapture) => {
-        let imageBitmap = await imageCapture.grabFrame();
-        let imageData = getImageData(imageBitmap).data;
+    const analyzeVideoFrame = async (imageCapture) => {
+        let imageData = await getImageData(imageCapture);
         let rgbSums = getRGBsums(imageData);
         setDominantColor(calculateDominantColor(rgbSums));
     };
@@ -48,7 +47,7 @@ export default function VideoCapture() {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => getVideoFrameData(imageCapture), 500);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture), 500);
         setIntervalId(id);
 
     };
