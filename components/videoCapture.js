@@ -1,6 +1,7 @@
 import {useRef, useState, useEffect} from 'react'
 
-import { Button } from '@chakra-ui/react';
+import { Button, Box, Container } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
@@ -63,21 +64,21 @@ export default function VideoCapture() {
     }
 
     return (
-        <>
+        <Container centerContent>
         <Webcam 
             videoConstraints={videoConstraints}
             audio={false}
             ref={webcamRef}
             onUserMedia={() => setReadyToAnalyze(true)}
             />
-        <p>{analyzingColor ?  dominantColor : ""}</p>
+        {/* <p>{analyzingColor ?  dominantColor : ""}</p> */}
         {readyToAnalyze ?
-        <div> 
+        <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
-            <Button disabled={!analyzingColor} onClick={stopRecord}>stop Analyzing</Button>
-        </div> :
-        <p>Loading webcam...</p>
+            <Button disabled={!analyzingColor} onClick={stopRecord}>Stop</Button>
+        </Box> :
+        <Spinner size='xl'/>
         }
-        </>
+        </Container>
     )
 }
