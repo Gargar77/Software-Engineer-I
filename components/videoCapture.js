@@ -5,7 +5,7 @@ import { Spinner } from '@chakra-ui/react';
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
-import {calculateDominantColor, getRGBsums, getAvgRGBAValue} from '../utils/colorAnalyzer';
+import {calculateDominantColor, getRGBsums, getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import frequencyMap from '../frequencyMap';
 const videoConstraints = {
     width: 200,
@@ -19,23 +19,22 @@ export default function VideoCapture({stopWebcam}) {
     const [intervalId, setIntervalId] = useState(null);
     const [readyToAnalyze, setReadyToAnalyze] = useState(false);
     const [audioSource, setAudioSource] = useState(null);
-    const [dominantColor, setDominantColor] = useState("");
-    const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
+    const [rgbaValue, setrgbaValue] = useState(null)
 
     useEffect(() => {
             if (!readyToAnalyze) return;
-            if (!dominantColor) return dominantColor;
+            if (!rgbaValue) return;
             if (!audioSource) {
-                startAudio(dominantColor)   
+                startAudio(rgbaValue)   
             } else {
-                audioSource.frequency.value = frequencyMap[dominantColor]
+                audioSource.frequency.value = convertRgbToFrequency(rgbaValue)
             }
-        },[dominantColor])
+        },[rgbaValue])
 
-     const startAudio = (dominant) => {
+     const startAudio = (rgbaValue) => {
         const audioContext = new AudioContext();
         let source = audioContext.createOscillator();
-        source.frequency.value = frequencyMap[dominant];
+        source.frequency.value = convertRgbToFrequency(rgbaValue)
         source.connect(audioContext.destination);
         setAudioSource(source);
         source.start();
@@ -43,16 +42,15 @@ export default function VideoCapture({stopWebcam}) {
 
     const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
-        let rgbSums = getRGBsums(imageData);
-        setDominantColor(calculateDominantColor(rgbSums));
-        setrgbaValue(getAvgRGBAValue(imageData));
+        let avgRgbValue = getAvgRGBAValue(imageData);
+        setrgbaValue(avgRgbValue);
     };
 
     const record = async () => {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture), 1000);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture), 500);
         setIntervalId(id);
 
     };
@@ -62,7 +60,6 @@ export default function VideoCapture({stopWebcam}) {
         setAnalyzingColor(false);
         audioSource && audioSource.stop();
         setAudioSource(null);
-        setDominantColor("")
     }
 
     const endSession = () => {
@@ -71,6 +68,7 @@ export default function VideoCapture({stopWebcam}) {
     }
 
     const getRgbaString = () => {
+        if (!rgbaValue) return 'rgb(0,0,0)'
         return (
             `rgb(${rgbaValue[0]},${rgbaValue[1]},${rgbaValue[2]})`
         )
@@ -84,7 +82,6 @@ export default function VideoCapture({stopWebcam}) {
             ref={webcamRef}
             onUserMedia={() => setReadyToAnalyze(true)}
             />
-        {/* <p>{analyzingColor ?  dominantColor : ""}</p> */}
         {readyToAnalyze ?
         <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
