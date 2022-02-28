@@ -80,7 +80,7 @@ export default function VideoCapture({stopWebcam}) {
         {readyToAnalyze ?
         <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
-            <Button disabled={!analyzingColor} onClick={stopRecord}>Stop</Button>
+            <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
           <Button onClick={()=> endSession()}>Stop Video</Button>
         </Box> :
         <Spinner size='xl'/>
