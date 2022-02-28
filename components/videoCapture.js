@@ -20,7 +20,7 @@ export default function VideoCapture({stopWebcam}) {
     const [intervalId, setIntervalId] = useState(null);
     const [readyToAnalyze, setReadyToAnalyze] = useState(false);
     const [audioSource, setAudioSource] = useState(null);
-    const [rgbaValue, setrgbaValue] = useState(null)
+    const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
 
     useEffect(() => {
             if (!readyToAnalyze) return;
@@ -69,7 +69,6 @@ export default function VideoCapture({stopWebcam}) {
     }
 
     const getRgbaString = () => {
-        if (!rgbaValue) return 'rgb(0,0,0)'
         return (
             `rgb(${rgbaValue[0]},${rgbaValue[1]},${rgbaValue[2]})`
         )
