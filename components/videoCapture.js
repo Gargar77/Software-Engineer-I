@@ -66,12 +66,14 @@ export default function VideoCapture({stopWebcam}) {
 
     return (
         <Container centerContent>
-        <Webcam 
-            videoConstraints={videoConstraints}
-            audio={false}
-            ref={webcamRef}
-            onUserMedia={() => setReadyToAnalyze(true)}
-            />
+            <Box borderRadius={10} overflow="hidden">
+                <Webcam 
+                videoConstraints={videoConstraints}
+                audio={false}
+                ref={webcamRef}
+                onUserMedia={() => setReadyToAnalyze(true)}
+                />
+            </Box>
         {readyToAnalyze ?
         <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
