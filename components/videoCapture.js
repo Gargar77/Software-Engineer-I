@@ -13,7 +13,7 @@ const videoConstraints = {
     facingMode: "user"
   };
 
-export default function VideoCapture() {
+export default function VideoCapture({stopWebcam}) {
     const webcamRef = useRef(null);
     const [analyzingColor, setAnalyzingColor] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
@@ -58,9 +58,14 @@ export default function VideoCapture() {
         clearInterval(intervalId);
         setIntervalId(null);
         setAnalyzingColor(false);
-        audioSource.stop();
+        audioSource && audioSource.stop();
         setAudioSource(null);
         setDominantColor("")
+    }
+
+    const endSession = () => {
+        stopRecord();
+        stopWebcam();
     }
 
     return (
@@ -76,6 +81,7 @@ export default function VideoCapture() {
         <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
             <Button disabled={!analyzingColor} onClick={stopRecord}>Stop</Button>
+          <Button onClick={()=> endSession()}>Stop Video</Button>
         </Box> :
         <Spinner size='xl'/>
         }

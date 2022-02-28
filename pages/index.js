@@ -19,8 +19,7 @@ export default function Home() {
       </Head>
         {isRecording ?
         <Container centerContent borderRadius="1g"  marginTop={12}>
-          <Box height={300} width={200}><VideoCapture/></Box>
-          <Button onClick={()=> setIsRecording(false)}>Stop Video</Button>
+          <Box height={300} width={200}><VideoCapture stopWebcam={() => setIsRecording(false)}/></Box>
         </Container>
          :
          <Container centerContent borderRadius="1g"  marginTop={12}>
