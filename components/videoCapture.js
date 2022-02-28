@@ -43,7 +43,7 @@ export default function VideoCapture({stopWebcam}) {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture), 500);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture), 80);
         setIntervalId(id);
 
     };
