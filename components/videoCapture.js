@@ -6,7 +6,7 @@ import { Spinner } from '@chakra-ui/react';
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
-
+import { startAudio } from '../utils/audioSampler';
 
 const videoConstraints = {
     width: 200,
@@ -26,20 +26,11 @@ export default function VideoCapture({stopWebcam}) {
             if (!readyToAnalyze) return;
             if (!rgbaValue) return;
             if (!audioSource) {
-                startAudio(rgbaValue)   
+                startAudio(rgbaValue, setAudioSource)   
             } else {
                 audioSource.frequency.value = convertRgbToFrequency(rgbaValue)
             }
         },[rgbaValue])
-
-     const startAudio = (rgbaValue) => {
-        const audioContext = new AudioContext();
-        let source = audioContext.createOscillator();
-        source.frequency.value = convertRgbToFrequency(rgbaValue)
-        source.connect(audioContext.destination);
-        setAudioSource(source);
-        source.start();
-    };
 
     const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
