@@ -1,7 +1,9 @@
 import {useRef, useState, useEffect} from 'react'
 
-import { Button, Box, Container } from '@chakra-ui/react';
+import { Button, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react'
+import {CloseIcon} from '@chakra-ui/icons'
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
@@ -66,6 +68,17 @@ export default function VideoCapture({stopWebcam}) {
 
     return (
         <Container centerContent>
+          {readyToAnalyze &&
+          <Flex width="100%" justify="end">
+             <IconButton 
+                borderRadius={12} 
+                position="relative" 
+                top={4} 
+                right={-2} 
+                aria-label='stop video' 
+                onClick={()=> endSession()} icon={<CloseIcon/>}/>
+          </Flex>
+          }
             <Box borderRadius={10} overflow="hidden">
                 <Webcam 
                 videoConstraints={videoConstraints}
@@ -79,7 +92,6 @@ export default function VideoCapture({stopWebcam}) {
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
             <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
             <Box height={10} width={10} bgColor={getRgbaString()}></Box>
-          <Button onClick={()=> endSession()}>Stop Video</Button>
         </Box> :
         <Spinner size='xl'/>
         }
