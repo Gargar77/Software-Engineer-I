@@ -4,7 +4,7 @@ import Head from 'next/head'
 import {Container, Box} from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 
-import VideoCapture from '../components/videoCapture'
+import SynesthesiaSimulator from '../components/synesthesiaSimulator'
 
 
 
@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
         {isRecording ?
         <Container centerContent borderRadius="1g"  marginTop={12}>
-          <Box maxW={400} maxH={300}><VideoCapture stopWebcam={() => setIsRecording(false)}/></Box>
+          <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
         </Container>
          :
          <Container centerContent borderRadius="1g"  marginTop={12}>
