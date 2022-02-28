@@ -23,6 +23,24 @@ export const calculateDominantColor = (rgbSums) => {
     return null;
 }
 
+//method 2: return avg rgb value
+export const getAvgRGBAValue = (colorDataArray) => {
+    const rgbaSums = [0,0,0,0];
+    let numPixels = 0;
+
+    for (let i = 0; i < colorDataArray.length; i += 4) {
+        rgbaSums[0] += colorDataArray[i];
+        rgbaSums[1] += colorDataArray[i + 1];
+        rgbaSums[2] += colorDataArray[i + 2];
+        rgbaSums[3] += colorDataArray[i + 3];
+        numPixels++;
+    }
+    return rgbaSums.map((num) => {
+        // multiplied by 4 to increase brightness of avg rgv value
+        return Math.floor((num / numPixels) * 4)
+    })
+}
+
 export const getRGBsums = (data) => {
     const sums = [0,0,0];
     let redSum = 0;
