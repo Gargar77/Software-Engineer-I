@@ -9,6 +9,8 @@ import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import { startAudio } from '../utils/audioSampler';
 
 const videoConstraints = {
+    width: 400,
+    height: 500,
     facingMode: "user"
   };
 
