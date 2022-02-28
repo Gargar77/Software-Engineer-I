@@ -5,7 +5,7 @@ import { Spinner } from '@chakra-ui/react';
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
-import {calculateDominantColor, getRGBsums} from '../utils/colorAnalyzer';
+import {calculateDominantColor, getRGBsums, getAvgRGBAValue} from '../utils/colorAnalyzer';
 import frequencyMap from '../frequencyMap';
 const videoConstraints = {
     width: 200,
@@ -20,6 +20,7 @@ export default function VideoCapture({stopWebcam}) {
     const [readyToAnalyze, setReadyToAnalyze] = useState(false);
     const [audioSource, setAudioSource] = useState(null);
     const [dominantColor, setDominantColor] = useState("");
+    const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
 
     useEffect(() => {
             if (!readyToAnalyze) return;
@@ -44,13 +45,14 @@ export default function VideoCapture({stopWebcam}) {
         let imageData = await getImageData(imageCapture);
         let rgbSums = getRGBsums(imageData);
         setDominantColor(calculateDominantColor(rgbSums));
+        setrgbaValue(getAvgRGBAValue(imageData));
     };
 
     const record = async () => {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture), 500);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture), 1000);
         setIntervalId(id);
 
     };
@@ -68,6 +70,12 @@ export default function VideoCapture({stopWebcam}) {
         stopWebcam();
     }
 
+    const getRgbaString = () => {
+        return (
+            `rgb(${rgbaValue[0]},${rgbaValue[1]},${rgbaValue[2]})`
+        )
+    }
+
     return (
         <Container centerContent>
         <Webcam 
@@ -81,6 +89,7 @@ export default function VideoCapture({stopWebcam}) {
         <Box> 
             <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
             <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
+            <Box height={10} width={10} bgColor={getRgbaString()}></Box>
           <Button onClick={()=> endSession()}>Stop Video</Button>
         </Box> :
         <Spinner size='xl'/>
