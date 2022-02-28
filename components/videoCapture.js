@@ -6,6 +6,8 @@ import { Spinner } from '@chakra-ui/react';
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
+
+
 const videoConstraints = {
     width: 200,
     height: 250,
