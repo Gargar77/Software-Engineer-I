@@ -23,8 +23,7 @@ export default function VideoCapture({stopWebcam}) {
     const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
 
     useEffect(() => {
-            if (!readyToAnalyze) return;
-            if (!rgbaValue) return;
+            if (!readyToAnalyze || !rgbaValue) return;
             if (!audioSource) {
                 startAudio(rgbaValue, setAudioSource)   
             } else {
