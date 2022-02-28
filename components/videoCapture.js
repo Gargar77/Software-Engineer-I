@@ -88,11 +88,13 @@ export default function VideoCapture({stopWebcam}) {
                 />
             </Box>
         {readyToAnalyze ?
-        <Box> 
-            <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
-            <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
-            <Box height={10} width={10} bgColor={getRgbaString()}></Box>
-        </Box> :
+        <Container centerContent>
+            <Flex width="100%" marginTop={10} marginBottom={10} justify="space-around">
+                <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
+                <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
+            </Flex> 
+            <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
+        </Container> :
         <Spinner size='xl'/>
         }
         </Container>
