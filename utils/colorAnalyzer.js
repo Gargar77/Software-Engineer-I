@@ -24,6 +24,6 @@ export const getAvgRGBAValue = (colorDataArray) => {
     }
     return rgbaSums.map((num) => {
         // multiplied by 4 to increase brightness of avg rgv value
-        return Math.floor((num / numPixels) * 9)
+        return Math.floor((num / numPixels) * 8)
     })
 }
