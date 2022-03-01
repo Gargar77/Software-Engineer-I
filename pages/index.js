@@ -4,7 +4,17 @@ import Head from 'next/head'
 import {Container, Box} from '@chakra-ui/react'
 import { Button, Image } from '@chakra-ui/react'
 import colorfulBackground from '../public/colorful_background_web.jpg'
-
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from '@chakra-ui/react'
 import SynesthesiaSimulator from '../components/synesthesiaSimulator'
 
 
@@ -17,8 +27,21 @@ export default function Home() {
         <title>Synesthesia</title>
         <meta name="description" content="synethesia simulator" />
       </Head>
-      <Box position="absolute"zIndex={-1}>
-       <Image fit="cover" heigth="100%" src={colorfulBackground.src}/>
+      <Box position="absolute" padding={4}>
+      <Popover>
+        <PopoverTrigger>
+          <Button>Trigger</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverCloseButton />
+          <PopoverHeader>Synesthesia</PopoverHeader>
+          <PopoverBody>Are you sure you want to have that milkshake?</PopoverBody>
+        </PopoverContent>
+      </Popover>
+      </Box>
+      <Box position="absolute" zIndex={-1}>
+       <Image fit="cover" height="100%" src={colorfulBackground.src}/>
       </Box>
       <main>
         {isRecording ?
