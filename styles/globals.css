@@ -12,6 +12,7 @@ body {
 
 div {
   height: 100%;
+  transition: all 300ms ease-in-out;
 }
 a {
   color: inherit;
