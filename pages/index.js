@@ -40,7 +40,7 @@ export default function Home() {
         </PopoverContent>
       </Popover>
       </Box>
-      <Box position="absolute" zIndex={-1}>
+      <Box position="absolute" zIndex={-1} filter={`brightness(${isRecording ? "0.6" : "1"})`}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
       </Box>
       <main>
