@@ -1,9 +1,16 @@
-import {useRef, useState, useEffect} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 
 import { Button, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
+import {
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    SliderMark,
+  } from '@chakra-ui/react'
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
@@ -23,6 +30,9 @@ export default function VideoCapture({stopWebcam}) {
     const [readyToAnalyze, setReadyToAnalyze] = useState(false);
     const [audioSource, setAudioSource] = useState(null);
     const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
+    const [brightnessThreshold, setBrightnessThreshold] = useState(8);
+    const thresholdRef = useRef();
+    thresholdRef.current = brightnessThreshold
 
     useEffect(() => {
             if (!readyToAnalyze || !rgbaValue) return;
@@ -31,11 +41,11 @@ export default function VideoCapture({stopWebcam}) {
             } else {
                 audioSource.frequency.value = convertRgbToFrequency(rgbaValue)
             }
-        },[rgbaValue])
+        },[rgbaValue, brightnessThreshold])
 
-    const analyzeVideoFrame = async (imageCapture) => {
+    const analyzeVideoFrame = async (imageCapture, getTreshold) => {
         let imageData = await getImageData(imageCapture);
-        let avgRgbValue = getAvgRGBAValue(imageData);
+        let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
         setrgbaValue(avgRgbValue);
     };
 
@@ -43,7 +53,7 @@ export default function VideoCapture({stopWebcam}) {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture), 80);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture, ()=> brightnessThreshold), 80);
         setIntervalId(id);
 
     };
@@ -94,6 +104,19 @@ export default function VideoCapture({stopWebcam}) {
                 <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
             </Flex> 
             <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
+            <Slider 
+                isDisabled={!analyzingColor || !audioSource}
+                max={10}
+                min={3} 
+                step={1}
+                defaultValue={8}
+                aria-label='brightness threshold slider' 
+                onChangeEnd={(val) => setBrightnessThreshold(val)}>
+                <SliderTrack>
+                    <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+            </Slider>
         </Container> :
         <Spinner size='xl'/>
         }

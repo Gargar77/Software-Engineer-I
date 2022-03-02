@@ -11,7 +11,7 @@ export const convertRgbToFrequency = (rgbArray) => {
 };
 //--------------------
 
-export const getAvgRGBAValue = (colorDataArray) => {
+export const getAvgRGBAValue = (colorDataArray, brightnessThreshold = 8) => {
     const rgbaSums = [0,0,0,0];
     let numPixels = 0;
 
@@ -24,6 +24,6 @@ export const getAvgRGBAValue = (colorDataArray) => {
     }
     return rgbaSums.map((num) => {
         // multiplied by 4 to increase brightness of avg rgv value
-        return Math.floor((num / numPixels) * 8)
+        return Math.floor((num / numPixels) * brightnessThreshold)
     })
 }
