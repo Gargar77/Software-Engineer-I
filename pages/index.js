@@ -50,8 +50,7 @@ export default function Home() {
           </Container>
           :
           <Container centerContent>
-            <Box height={300}></Box>
-            <Button onClick={()=> setIsRecording(true)}>Start</Button>
+            <Button marginTop={300} onClick={()=> setIsRecording(true)}>Start</Button>
           </Container>
         }
       </main>
