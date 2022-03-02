@@ -1,5 +1,6 @@
 //--Luminance Method: RGB -> Luminance -> sound frequency
 const  _getLuminance = (rgbArray) => {
+    //TODO: link resource to get luminance of RGB values
     return (0.299 * rgbArray[0]) + (0.587 * rgbArray[1]) + (0.114 * rgbArray[2])
 }
 
