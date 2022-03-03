@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Head from 'next/head'
 import {Container, Box} from '@chakra-ui/react'
-import { Button, Image, IconButton, Text } from '@chakra-ui/react'
+import { Button, Image, IconButton, Text, Flex } from '@chakra-ui/react'
 import StyledButton from '../components/styledButton'
 import { InfoIcon } from '@chakra-ui/icons'
 import colorfulBackground from '../public/colorful_background_web.jpg'
@@ -63,7 +63,10 @@ export default function Home() {
           </Container>
           :
           <Container centerContent marginBottom={40}>
-            <StyledButton marginTop='50vh' size="lg" onClick={()=> setIsRecording(true)}>Start</StyledButton>
+            <Flex marginTop='40vh' direction='column'>
+              <Text color="white" fontWeight="bold" fontSize='2rem' marginBottom={12}>Synesthesia</Text>
+              <StyledButton size="lg" onClick={()=> setIsRecording(true)}>Start</StyledButton>
+            </Flex>
           </Container>
         }
       </main>
