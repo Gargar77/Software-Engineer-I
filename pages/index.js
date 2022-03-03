@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 
 import Head from 'next/head'
 import {Container, Box} from '@chakra-ui/react'
-import { Button, Image } from '@chakra-ui/react'
+import { Button, Image, IconButton } from '@chakra-ui/react'
+import { InfoIcon } from '@chakra-ui/icons'
 import colorfulBackground from '../public/colorful_background_web.jpg'
 import {
   Popover,
@@ -15,6 +16,8 @@ import {
   PopoverCloseButton,
   PopoverAnchor,
 } from '@chakra-ui/react'
+import { Link } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 import SynesthesiaSimulator from '../components/synesthesiaSimulator'
 
 
@@ -30,13 +33,22 @@ export default function Home() {
       <Box position="absolute" padding={4}>
       <Popover>
         <PopoverTrigger>
-          <Button>Trigger</Button>
+          <IconButton 
+            size="lg" 
+            variant="ghost" 
+            icon={<InfoIcon boxSize="1.5em" color="white"/>}
+            />
         </PopoverTrigger>
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverHeader>Synesthesia</PopoverHeader>
-          <PopoverBody>Are you sure you want to have that milkshake?</PopoverBody>
+          <PopoverBody>A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.</PopoverBody>
+          <PopoverFooter>
+            <Link href='https://www.healthline.com/health/synesthesia' isExternal>
+              Learn more<ExternalLinkIcon mx='2px'/>
+            </Link>
+          </PopoverFooter>
         </PopoverContent>
       </Popover>
       </Box>
