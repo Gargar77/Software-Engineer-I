@@ -53,7 +53,7 @@ export default function Home() {
         </PopoverContent>
       </Popover>
       </Box>
-      <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.6" : "1")} blur={isRecording ? '3px' : '0'}>
+      <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
       </Box>
       <main>
