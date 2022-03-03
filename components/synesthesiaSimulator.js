@@ -11,6 +11,7 @@ import {
     SliderThumb,
     SliderMark,
   } from '@chakra-ui/react'
+import StyledButton from './styledButton'
 
 import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
@@ -104,8 +105,8 @@ export default function VideoCapture({stopWebcam}) {
                 <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
             </Flex> */}
             <ButtonGroup marginTop={10} marginBottom={10} spacing={16}>
-                <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
-                <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
+                <StyledButton disabled={analyzingColor} onClick={record}>Analyze</StyledButton>
+                <StyledButton disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</StyledButton>
             </ButtonGroup>  
             <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
             <Slider 
@@ -122,7 +123,7 @@ export default function VideoCapture({stopWebcam}) {
                 <SliderThumb />
             </Slider>
         </Container> :
-        <Spinner size='xl'/>
+        <Spinner marginTop={100} size='xl' color='white'/>
         }
         </Container>
     )
