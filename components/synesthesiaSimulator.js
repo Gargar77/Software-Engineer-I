@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react'
 
-import { Button, Box, Container, Flex } from '@chakra-ui/react';
+import { Button, ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
@@ -99,10 +99,14 @@ export default function VideoCapture({stopWebcam}) {
             </Box>
         {readyToAnalyze ?
         <Container centerContent>
-            <Flex width="100%" marginTop={10} marginBottom={10} justify="space-around">
+            {/* <Flex width="100%" marginTop={10} marginBottom={10} justify="space-around">
                 <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
                 <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
-            </Flex> 
+            </Flex> */}
+            <ButtonGroup marginTop={10} marginBottom={10} spacing={16}>
+                <Button disabled={analyzingColor} onClick={record}>Analyze</Button>
+                <Button disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</Button>
+            </ButtonGroup>  
             <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
             <Slider 
                 isDisabled={!analyzingColor || !audioSource}
