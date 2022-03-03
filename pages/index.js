@@ -58,17 +58,17 @@ export default function Home() {
       </Box>
       <main>
         {isRecording ?
-          <Container centerContent>
+          <Container centerContent marginBottom={10}>
             <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
           </Container>
           :
-          <Container centerContent>
+          <Container centerContent marginBottom={40}>
             <StyledButton marginTop='50vh' size="lg" onClick={()=> setIsRecording(true)}>Start</StyledButton>
           </Container>
         }
       </main>
       <footer>
-     
+       <Text textShadow='1px 1px black' textAlign="center" color="white">Made with ❤️ by <Link isExternal href='https://garybautista.me/' color="#acd9ff">Gary Bautista</Link></Text>
       </footer>
     </div>
   )
