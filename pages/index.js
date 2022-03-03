@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Head from 'next/head'
 import {Container, Box} from '@chakra-ui/react'
-import { Button, Image, IconButton } from '@chakra-ui/react'
+import { Button, Image, IconButton, Text } from '@chakra-ui/react'
 import { InfoIcon } from '@chakra-ui/icons'
 import colorfulBackground from '../public/colorful_background_web.jpg'
 import {
@@ -42,8 +42,8 @@ export default function Home() {
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader>Synesthesia</PopoverHeader>
-          <PopoverBody>A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.</PopoverBody>
+          <PopoverHeader><Text fontWeight="bold">Synesthesia</Text></PopoverHeader>
+          <PopoverBody><Text>A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.</Text></PopoverBody>
           <PopoverFooter>
             <Link href='https://www.healthline.com/health/synesthesia' isExternal>
               Learn more<ExternalLinkIcon mx='2px'/>
