@@ -90,7 +90,7 @@ export default function VideoCapture({stopWebcam}) {
                 onClick={()=> endSession()} icon={<CloseIcon/>}/>
           </Flex>
           }
-            <Box borderRadius={10} overflow="hidden">
+            <Box borderRadius={10} boxShadow={readyToAnalyze ? `0px 0px 18px ${getRgbaString()}` : null} overflow="hidden">
                 <Webcam 
                 videoConstraints={videoConstraints}
                 audio={false}
