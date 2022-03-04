@@ -8,18 +8,17 @@ import {
     PopoverArrow,
     PopoverCloseButton,
   } from '@chakra-ui/react'
-  import { InfoIcon } from '@chakra-ui/icons'
   import { Link } from '@chakra-ui/react'
   import { ExternalLinkIcon } from '@chakra-ui/icons'
   import {IconButton, Text} from '@chakra-ui/react'
 
-const infoPopOver = ({config}) => (
+const infoPopOver = ({config, infoIcon}) => (
     <Popover>
         <PopoverTrigger>
           <IconButton 
             size="lg" 
             variant="ghost" 
-            icon={<InfoIcon boxSize="1.5em" color="white"/>}
+            icon={infoIcon}
             />
         </PopoverTrigger>
         <PopoverContent>

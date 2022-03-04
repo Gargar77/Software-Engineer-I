@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
+import InfoPopOver from './infoPopover';
 import {
     Slider,
     SliderTrack,
@@ -33,8 +34,12 @@ export default function VideoCapture({stopWebcam}) {
     const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
     const [brightnessThreshold, setBrightnessThreshold] = useState(8);
     const thresholdRef = useRef();
+    const infoConfig = {
+        title:"Instructions",
+        body:"when you click 'analyze', the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!"
+    }
     thresholdRef.current = brightnessThreshold
-
+    
     useEffect(() => {
             if (!readyToAnalyze || !rgbaValue) return;
             if (!audioSource) {
@@ -97,6 +102,9 @@ export default function VideoCapture({stopWebcam}) {
                 ref={webcamRef}
                 onUserMedia={() => setReadyToAnalyze(true)}
                 />
+                <Box position="absolute">
+                    {readyToAnalyze && <InfoPopOver config={infoConfig}/>}
+                </Box>
             </Box>
         {readyToAnalyze ?
         <Container centerContent>

@@ -8,6 +8,7 @@ import colorfulBackground from '../public/colorful_background_web.jpg'
 import InfoPopOver from '../components/infoPopover';
 import { Link } from '@chakra-ui/react'
 import SynesthesiaSimulator from '../components/synesthesiaSimulator'
+import { InfoIcon } from '@chakra-ui/icons'
 
 const infoConfig = {
   title:"Synesthesia",
@@ -27,7 +28,7 @@ export default function Home() {
         <meta name="description" content="synethesia simulator" />
       </Head>
       <Box position="absolute" padding={4}>
-      {!isRecording && <InfoPopOver config={infoConfig}/>}
+      {!isRecording && <InfoPopOver config={infoConfig} infoIcon={<InfoIcon boxSize="1.5em" color="white"/>}/>}
       </Box>
       <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
