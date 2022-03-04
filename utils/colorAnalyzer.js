@@ -12,19 +12,16 @@ export const convertRgbToFrequency = (rgbArray) => {
 };
 //--------------------
 
-export const getAvgRGBAValue = (colorDataArray, brightnessThreshold = 5) => {
+export const getAvgRGBAValue = (colorDataArray, brightnessThreshold = 100) => {
     const rgbaSums = [0,0,0,0];
-    let numPixels = 0;
-
     for (let i = 0; i < colorDataArray.length; i += 4) {
         rgbaSums[0] += colorDataArray[i];
         rgbaSums[1] += colorDataArray[i + 1];
         rgbaSums[2] += colorDataArray[i + 2];
         rgbaSums[3] += colorDataArray[i + 3];
-        numPixels++;
     }
     return rgbaSums.map((num) => {
         // multiplied by threshold to adjust brightness of avg rgb value
-        return Math.floor((num / numPixels) * brightnessThreshold)
+        return Math.floor(num / (colorDataArray.length / 4)) + brightnessThreshold
     })
 }
