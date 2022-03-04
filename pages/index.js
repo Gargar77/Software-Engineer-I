@@ -62,10 +62,16 @@ export default function Home() {
             <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
           </Container>
           :
-          <Container centerContent marginBottom={40}>
-            <Flex marginTop='40vh' direction='column'>
-              <Text color="white" fontWeight="bold" fontSize='2rem' marginBottom={12}>Synesthesia</Text>
-              <StyledButton size="lg" onClick={()=> setIsRecording(true)}>Start</StyledButton>
+          <Container centerContent marginBottom={50}>
+            <Flex marginTop='30vh' direction='column' align="center">
+              <Text 
+                color="white" 
+                textShadow='1px 1px black' 
+                fontSize='6xl' 
+                fontFamily="'Modak', cursive"
+                letterSpacing={2}
+                marginBottom={12}>Synesthesia</Text>
+              <StyledButton size="lg" width={150} onClick={()=> setIsRecording(true)}><Text fontWeight="bold" fontSize='xl'>Start</Text></StyledButton>
             </Flex>
           </Container>
         }
