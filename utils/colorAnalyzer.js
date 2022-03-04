@@ -12,7 +12,7 @@ export const convertRgbToFrequency = (rgbArray) => {
 };
 //--------------------
 
-export const getAvgRGBAValue = (colorDataArray, brightnessThreshold = 8) => {
+export const getAvgRGBAValue = (colorDataArray, brightnessThreshold = 5) => {
     const rgbaSums = [0,0,0,0];
     let numPixels = 0;
 

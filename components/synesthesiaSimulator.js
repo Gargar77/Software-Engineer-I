@@ -110,7 +110,7 @@ export default function VideoCapture({stopWebcam}) {
                 max={10}
                 min={3} 
                 step={1}
-                defaultValue={8}
+                defaultValue={5}
                 aria-label='brightness threshold slider' 
                 onChangeEnd={(val) => setBrightnessThreshold(val)}>
                 <SliderTrack>
