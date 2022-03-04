@@ -25,7 +25,7 @@ const infoPopOver = ({config, infoIcon}) => (
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverHeader><Text fontWeight="bold">{config.title}</Text></PopoverHeader>
-          <PopoverBody><Text>{config.body}</Text></PopoverBody>
+          <PopoverBody><Text fontSize='1.2rem'>{config.body}</Text></PopoverBody>
           {config.resource && <PopoverFooter>
             <Link href={config.resource.link} isExternal>
               {config.resource.text}<ExternalLinkIcon mx='2px'/>
