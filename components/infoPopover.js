@@ -13,7 +13,7 @@ import {
   import { ExternalLinkIcon } from '@chakra-ui/icons'
   import {IconButton, Text} from '@chakra-ui/react'
 
-const infoPopOver = () => (
+const infoPopOver = ({config}) => (
     <Popover>
         <PopoverTrigger>
           <IconButton 
@@ -25,13 +25,13 @@ const infoPopOver = () => (
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader><Text fontWeight="bold">Synesthesia</Text></PopoverHeader>
-          <PopoverBody><Text>A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.</Text></PopoverBody>
-          <PopoverFooter>
-            <Link href='https://www.healthline.com/health/synesthesia' isExternal>
-              Learn more<ExternalLinkIcon mx='2px'/>
+          <PopoverHeader><Text fontWeight="bold">{config.title}</Text></PopoverHeader>
+          <PopoverBody><Text>{config.body}</Text></PopoverBody>
+          {config.resource && <PopoverFooter>
+            <Link href={config.resource.link} isExternal>
+              {config.resource.text}<ExternalLinkIcon mx='2px'/>
             </Link>
-          </PopoverFooter>
+          </PopoverFooter>}
         </PopoverContent>
       </Popover>
 );

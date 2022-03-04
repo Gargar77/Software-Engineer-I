@@ -9,7 +9,14 @@ import InfoPopOver from '../components/infoPopover';
 import { Link } from '@chakra-ui/react'
 import SynesthesiaSimulator from '../components/synesthesiaSimulator'
 
-
+const infoConfig = {
+  title:"Synesthesia",
+  body:"A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.",
+  resource:{
+    text:"Learn more",
+    link:"https://www.healthline.com/health/synesthesia"
+  }
+}
 
 export default function Home() {
   const [isRecording,setIsRecording] = useState(false);
@@ -20,7 +27,7 @@ export default function Home() {
         <meta name="description" content="synethesia simulator" />
       </Head>
       <Box position="absolute" padding={4}>
-      {!isRecording && <InfoPopOver/>}
+      {!isRecording && <InfoPopOver config={infoConfig}/>}
       </Box>
       <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
