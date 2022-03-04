@@ -10,13 +10,19 @@ import { Link } from '@chakra-ui/react'
 import SynesthesiaSimulator from '../components/synesthesiaSimulator'
 import { InfoIcon } from '@chakra-ui/icons'
 
-const infoConfig = {
+const definitionInfo = {
   title:"Synesthesia",
   body:"A neurological condition in which information meant to stimulate one of your senses stimulates several of your senses.",
   resource:{
     text:"Learn more",
     link:"https://www.healthline.com/health/synesthesia"
   }
+}
+
+
+const InstructionsInfo = {
+  title:"Instructions",
+  body:"when you click 'analyze', the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!"
 }
 
 export default function Home() {
@@ -27,8 +33,8 @@ export default function Home() {
         <title>Synesthesia</title>
         <meta name="description" content="synethesia simulator" />
       </Head>
-      <Box position="absolute" padding={4}>
-      {!isRecording && <InfoPopOver config={infoConfig} infoIcon={<InfoIcon boxSize="1.5em" color="white"/>}/>}
+      <Box position="absolute" padding={isRecording ? 10 : 4} zIndex={2}>
+      <InfoPopOver config={isRecording ? InstructionsInfo : definitionInfo} infoIcon={<InfoIcon boxSize="1.5em" color="white"/>}/>
       </Box>
       <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
