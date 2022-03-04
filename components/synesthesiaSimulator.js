@@ -44,7 +44,7 @@ export default function VideoCapture({stopWebcam}) {
             }
         },[rgbaValue, brightnessThreshold])
 
-    const analyzeVideoFrame = async (imageCapture, getTreshold) => {
+    const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
         let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
         setrgbaValue(avgRgbValue);
