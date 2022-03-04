@@ -6,6 +6,7 @@ const styledButton = (props) => {
             variant="outline"
             boxShadow="dark-lg"
             borderRadius={18}
+            borderWidth={3}
             >
             <Text color="white">
                 {props.children}
