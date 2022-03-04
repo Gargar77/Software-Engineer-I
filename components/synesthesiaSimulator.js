@@ -107,10 +107,10 @@ export default function VideoCapture({stopWebcam}) {
             <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
             <Slider 
                 isDisabled={!analyzingColor || !audioSource}
-                max={10}
-                min={3} 
+                max={100}
+                min={0} 
                 step={1}
-                defaultValue={5}
+                defaultValue={50}
                 aria-label='brightness threshold slider' 
                 onChangeEnd={(val) => setBrightnessThreshold(val)}>
                 <SliderTrack>
