@@ -22,7 +22,7 @@ const definitionInfo = {
 
 const InstructionsInfo = {
   title:"Instructions",
-  body:"when you click 'analyze', the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!"
+  body:<Text>when you click <StyledButton disabled color="black">Analyze</StyledButton>, the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!</Text>
 }
 
 export default function Home() {
@@ -54,7 +54,7 @@ export default function Home() {
                 fontFamily="'Modak', cursive"
                 letterSpacing={2}
                 marginBottom={12}>Synesthesia</Text>
-              <StyledButton size="lg" width={150} onClick={()=> setIsRecording(true)}><Text fontWeight="bold" fontSize='xl'>Start</Text></StyledButton>
+              <StyledButton color="white" size="lg" width={150} onClick={()=> setIsRecording(true)}><Text fontWeight="bold" fontSize='xl'>Start</Text></StyledButton>
             </Flex>
           </Container>
         }

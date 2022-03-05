@@ -8,7 +8,7 @@ const styledButton = (props) => {
             borderRadius={18}
             borderWidth={3}
             >
-            <Text color="white">
+            <Text color={props.color}>
                 {props.children}
             </Text>
         </Button>

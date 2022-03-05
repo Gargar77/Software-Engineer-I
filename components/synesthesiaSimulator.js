@@ -113,8 +113,8 @@ export default function VideoCapture({stopWebcam}) {
         {readyToAnalyze ?
         <Container centerContent>
             <ButtonGroup marginTop={10} marginBottom={10} spacing={16}>
-                <StyledButton disabled={analyzingColor} onClick={record}>Analyze</StyledButton>
-                <StyledButton disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</StyledButton>
+                <StyledButton color="white" disabled={analyzingColor} onClick={record}>Analyze</StyledButton>
+                <StyledButton color="white" disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</StyledButton>
             </ButtonGroup>  
             <Box height={10} width="100%" borderRadius={14} marginBottom={8} bgColor={getRgbaString()}></Box>
             <Flex align="center" justify="space-between" width="100%" >
