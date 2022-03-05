@@ -2,9 +2,14 @@ import {convertRgbToFrequency} from './colorAnalyzer'
 
 export const startAudio = (rgbaValue, setAudioSource) => {
     const audioContext = new AudioContext();
-    let source = audioContext.createOscillator();
-    source.frequency.value = convertRgbToFrequency(rgbaValue)
-    source.connect(audioContext.destination);
-    setAudioSource(source);
-    source.start();
+    const oscillator = new OscillatorNode(audioContext);
+    const gainNode = new GainNode(audioContext);
+
+    oscillator.frequency.value = convertRgbToFrequency(rgbaValue)
+    // oscillator.connect(audioContext.destination);
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    gainNode.gain.value = 0.03
+    setAudioSource(oscillator);
+    oscillator.start();
 };
