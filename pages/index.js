@@ -22,7 +22,7 @@ const definitionInfo = {
 
 const InstructionsInfo = {
   title:"Instructions",
-  body:<Text>when you click <StyledButton disabled color="black">Analyze</StyledButton>, the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!</Text>
+  body:<Text>when you click <StyledButton disabled color="black">Analyze</StyledButton> the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!</Text>
 }
 
 export default function Home() {
