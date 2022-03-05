@@ -6,7 +6,6 @@ export const startAudio = (rgbaValue, setAudioSource) => {
     const gainNode = new GainNode(audioContext);
 
     oscillator.frequency.value = convertRgbToFrequency(rgbaValue)
-    // oscillator.connect(audioContext.destination);
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
     gainNode.gain.value = 0.03
