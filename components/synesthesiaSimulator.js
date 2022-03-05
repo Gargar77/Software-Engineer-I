@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
+import { QuestionIcon } from '@chakra-ui/icons';
 import InfoPopOver from './infoPopover';
 import {
     Slider,
@@ -35,24 +36,21 @@ export default function VideoCapture({stopWebcam}) {
     const [rgbaValue, setrgbaValue] = useState([0,0,0,0])
     const [brightnessThreshold, setBrightnessThreshold] = useState(8);
     const thresholdRef = useRef();
-    const infoConfig = {
-        title:"Instructions",
-        body:"when you click 'analyze', the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!"
+    const sliderInfoConfig = {
+        title:"Threshold slider",
+        body:"This slider allows you to control how 'bright' or 'dark' the current video is being perceived. Play around with the slider to hear how the sound changes!"
     }
     thresholdRef.current = brightnessThreshold
     
     useEffect(() => {
-            if (!readyToAnalyze || !rgbaValue) {
-                if (audioSource) audioSource.stop();
-                return;
-            }
+            if (!readyToAnalyze || !rgbaValue) return;
             if (!audioSource) {
                 startAudio(rgbaValue, setAudioSource)   
             } else {
                 audioSource.frequency.value = convertRgbToFrequency(rgbaValue)
             }
         },[rgbaValue, brightnessThreshold])
-
+    
     const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
         let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
@@ -72,7 +70,6 @@ export default function VideoCapture({stopWebcam}) {
         clearInterval(intervalId);
         setIntervalId(null);
         setAnalyzingColor(false);
-        setAudioSource(null)
     }
 
     const endSession = () => {
@@ -106,9 +103,6 @@ export default function VideoCapture({stopWebcam}) {
                 ref={webcamRef}
                 onUserMedia={() => setReadyToAnalyze(true)}
                 />
-                <Box position="absolute">
-                    {readyToAnalyze && <InfoPopOver config={infoConfig}/>}
-                </Box>
             </Box>
         {readyToAnalyze ?
         <Container centerContent>
@@ -116,20 +110,24 @@ export default function VideoCapture({stopWebcam}) {
                 <StyledButton disabled={analyzingColor} onClick={record}>Analyze</StyledButton>
                 <StyledButton disabled={!analyzingColor || !audioSource} onClick={stopRecord}>Stop</StyledButton>
             </ButtonGroup>  
-            <Box height={10} width="100%" borderRadius={14} bgColor={getRgbaString()}></Box>
-            <Slider 
-                isDisabled={!analyzingColor || !audioSource}
-                max={100}
-                min={0} 
-                step={1}
-                defaultValue={50}
-                aria-label='brightness threshold slider' 
-                onChangeEnd={(val) => setBrightnessThreshold(val)}>
-                <SliderTrack>
-                    <SliderFilledTrack />
-                </SliderTrack>
-                <SliderThumb />
-            </Slider>
+            <Box height={10} width="100%" borderRadius={14} marginBottom={8} bgColor={getRgbaString()}></Box>
+            <Flex align="center" justify="space-between" width="100%" >
+                <InfoPopOver config={sliderInfoConfig} infoIcon={<QuestionIcon color="white"/>}/>
+                <Slider 
+                    isDisabled={!analyzingColor || !audioSource}
+                    width={200}
+                    max={100}
+                    min={0} 
+                    step={1}
+                    defaultValue={50}
+                    aria-label='brightness threshold slider' 
+                    onChangeEnd={(val) => setBrightnessThreshold(val)}>
+                    <SliderTrack>
+                        <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb />
+                </Slider>
+            </Flex>
         </Container> :
         <Spinner marginTop={100} size='xl' color='white'/>
         }
