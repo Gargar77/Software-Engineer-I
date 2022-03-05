@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react'
 
-import { Button, ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
+import { ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
@@ -11,7 +11,6 @@ import {
     SliderTrack,
     SliderFilledTrack,
     SliderThumb,
-    SliderMark,
   } from '@chakra-ui/react'
 import StyledButton from './styledButton'
 
@@ -19,7 +18,6 @@ import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import { startAudio } from '../utils/audioSampler';
-import { AnimateSharedLayout } from 'framer-motion';
 
 const videoConstraints = {
     width: 400,
@@ -118,7 +116,7 @@ export default function VideoCapture({stopWebcam}) {
             </ButtonGroup>  
             <Box height={10} width="100%" borderRadius={14} marginBottom={8} bgColor={getRgbaString()}></Box>
             <Flex align="center" justify="space-between" width="100%" >
-                <InfoPopOver config={sliderInfoConfig} infoIcon={<QuestionIcon color="white"/>}/>
+                <InfoPopOver config={sliderInfoConfig} infoIcon={<QuestionIcon boxSize="1.5em" color="white"/>}/>
                 <Slider 
                     isDisabled={!analyzingColor || !audioSource}
                     width={200}
