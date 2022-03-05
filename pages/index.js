@@ -39,7 +39,7 @@ export default function Home() {
       <Box height="100%" position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
       </Box>
-      <main style={{height:'100%', marginBottom:18}}>
+      <main style={{height:'80vh', marginBottom:18}}>
         {isRecording ?
           <Container centerContent marginBottom={10}>
             <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
@@ -59,9 +59,13 @@ export default function Home() {
           </Container>
         }
       </main>
-      <footer>
-       <Text textShadow='1px 1px black' textAlign="center" color="white">Made with ❤️ by <Link isExternal href='https://garybautista.me/' color="#acd9ff">Gary Bautista</Link></Text>
-      </footer>
+      {
+        !isRecording && 
+        <footer>
+          <Text textShadow='1px 1px black' textAlign="center" color="white">Made with ❤️ by <Link isExternal href='https://garybautista.me/' color="#acd9ff">Gary Bautista</Link></Text>
+        </footer>
+      }
+      
     </div>
   )
 }
