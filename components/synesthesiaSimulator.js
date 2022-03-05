@@ -50,7 +50,13 @@ export default function VideoCapture({stopWebcam}) {
                 audioSource.frequency.value = convertRgbToFrequency(rgbaValue)
             }
         },[rgbaValue, brightnessThreshold])
-    
+        
+    useEffect(() => {
+        if (!analyzingColor && audioSource) {
+            audioSource.stop();
+            setAudioSource(null)
+        }
+    })
     const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
         let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
