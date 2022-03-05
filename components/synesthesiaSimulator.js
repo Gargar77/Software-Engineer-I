@@ -18,6 +18,7 @@ import Webcam from  'react-webcam'
 import getImageData from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import { startAudio } from '../utils/audioSampler';
+import { AnimateSharedLayout } from 'framer-motion';
 
 const videoConstraints = {
     width: 400,
@@ -41,7 +42,10 @@ export default function VideoCapture({stopWebcam}) {
     thresholdRef.current = brightnessThreshold
     
     useEffect(() => {
-            if (!readyToAnalyze || !rgbaValue) return;
+            if (!readyToAnalyze || !rgbaValue) {
+                if (audioSource) audioSource.stop();
+                return;
+            }
             if (!audioSource) {
                 startAudio(rgbaValue, setAudioSource)   
             } else {
@@ -59,16 +63,16 @@ export default function VideoCapture({stopWebcam}) {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture, ()=> brightnessThreshold), 80);
+        let id = setInterval(() => analyzeVideoFrame(imageCapture, ()=> brightnessThreshold), 100);
         setIntervalId(id);
 
     };
-    const stopRecord = () => {
+    const stopRecord = async () => {
+        audioSource && await audioSource.stop();
         clearInterval(intervalId);
         setIntervalId(null);
         setAnalyzingColor(false);
-        audioSource && audioSource.stop();
-        setAudioSource(null);
+        setAudioSource(null)
     }
 
     const endSession = () => {
