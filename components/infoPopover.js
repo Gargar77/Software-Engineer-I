@@ -12,23 +12,23 @@ import {
   import { ExternalLinkIcon } from '@chakra-ui/icons'
   import {IconButton, Text} from '@chakra-ui/react'
 
-const infoPopOver = ({config, infoIcon}) => (
-    <Popover>
+const infoPopOver = (props) => (
+    <Popover {...props}>
         <PopoverTrigger>
           <IconButton 
             size="lg" 
             variant="ghost" 
-            icon={infoIcon}
+            icon={props.infoIcon}
             />
         </PopoverTrigger>
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader><Text fontWeight="bold">{config.title}</Text></PopoverHeader>
-          <PopoverBody><Text fontSize='1.2rem'>{config.body}</Text></PopoverBody>
-          {config.resource && <PopoverFooter>
-            <Link href={config.resource.link} isExternal>
-              {config.resource.text}<ExternalLinkIcon mx='2px'/>
+          <PopoverHeader><Text fontWeight="bold">{props.config.title}</Text></PopoverHeader>
+          <PopoverBody><Text fontSize='1.2rem'>{props.config.body}</Text></PopoverBody>
+          {props.config.resource && <PopoverFooter>
+            <Link href={props.config.resource.link} isExternal>
+              {props.config.resource.text}<ExternalLinkIcon mx='2px'/>
             </Link>
           </PopoverFooter>}
         </PopoverContent>

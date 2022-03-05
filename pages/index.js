@@ -36,10 +36,10 @@ export default function Home() {
       <Box position="absolute" padding={isRecording ? 10 : 4} zIndex={2}>
       <InfoPopOver config={isRecording ? InstructionsInfo : definitionInfo} infoIcon={<InfoIcon boxSize="1.5em" color="white"/>}/>
       </Box>
-      <Box position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
+      <Box height="100%" position="absolute" zIndex={-1} filter='auto' brightness={(isRecording ? "0.5" : "1")} blur={isRecording ? '3px' : '0'}>
        <Image fit="cover" height="100%" src={colorfulBackground.src}/>
       </Box>
-      <main>
+      <main style={{height:'100%', marginBottom:18}}>
         {isRecording ?
           <Container centerContent marginBottom={10}>
             <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
