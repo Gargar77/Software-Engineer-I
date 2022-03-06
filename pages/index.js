@@ -34,7 +34,17 @@ export default function Home() {
         <meta name="description" content="synethesia simulator" />
       </Head>
       <Box position="absolute" padding={isRecording ? 10 : 4} transition='padding 300ms ease-out' zIndex={2}>
-      <InfoPopOver config={isRecording ? InstructionsInfo : definitionInfo}  infoIcon={<InfoIcon boxSize="1.5em" color={isRecording ? "red" : "white"} transition="color 1200ms ease-in"/>}/>
+      <InfoPopOver 
+        config={isRecording ? InstructionsInfo : definitionInfo}  
+        infoIcon={
+          <InfoIcon 
+            boxSize="1.5em" 
+            color={isRecording ? "red" : "white"} 
+            transition="color 1200ms ease-in"
+            opacity={0.7}
+            />
+        }
+        />
       </Box>
       <Box 
         height="100%" 
