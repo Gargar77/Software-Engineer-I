@@ -102,32 +102,33 @@ export default function VideoCapture({stopWebcam}) {
 
     return (
         <Container centerContent>
-          {readyToAnalyze &&
-          <Flex width="100%" justify="end">
-             <IconButton 
-                borderRadius={12} 
-                position="relative" 
-                top={4} 
-                right={-2} 
-                aria-label='stop video' 
-                onClick={()=> endSession()} icon={<CloseIcon/>}/>
-          </Flex>
-          }
-            <Box position="relative" maxW={400} maxH={450} borderRadius={10} boxShadow={readyToAnalyze ? `0px 0px 18px ${getRgbaString()}` : null} overflow="hidden">
+        
+            <Box position="relative" marginTop={30} maxW={400} maxH={450} borderRadius={10} boxShadow={readyToAnalyze ? `0px 0px 18px ${getRgbaString()}` : null} overflow="hidden">
                 <Webcam 
                 videoConstraints={videoConstraints}
                 audio={false}
                 ref={webcamRef}
                 onUserMedia={() => setReadyToAnalyze(true)}
                 />
-                <IconButton 
-                    position="absolute" 
-                    variant="ghost" 
-                    icon={<Icon as={IoMdReverseCamera} w={10} h={10} color="white" opacity={0.8}/>}
-                    right={5}
-                    bottom={5}
-                    onClick={() => flipCamera()}
-                    />
+                {readyToAnalyze && 
+                    <IconButton 
+                        borderRadius={50} 
+                        position="absolute" 
+                        top={4} 
+                        right={5}
+                        opacity={0.8}
+                        aria-label='stop video'
+                        onClick={()=> endSession()} icon={<CloseIcon/>}/>
+                }
+                {readyToAnalyze &&
+                    <IconButton 
+                        position="absolute" 
+                        variant="ghost" 
+                        icon={<Icon as={IoMdReverseCamera} w={10} h={10} color="white" opacity={0.8}/>}
+                        right={5}
+                        bottom={5}
+                        onClick={() => flipCamera()}/>
+                }
             </Box>
         {readyToAnalyze ?
         <Container centerContent>
