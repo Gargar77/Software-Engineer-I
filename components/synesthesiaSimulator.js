@@ -2,9 +2,11 @@ import React, {useRef, useState, useEffect} from 'react'
 
 import { ButtonGroup, Box, Container, Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
+import {Icon} from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 import {CloseIcon} from '@chakra-ui/icons'
 import { QuestionIcon } from '@chakra-ui/icons';
+import {IoMdReverseCamera} from 'react-icons/io';
 import InfoPopOver from './infoPopover';
 import {
     Slider,
@@ -19,14 +21,11 @@ import getImageData from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import { startAudio } from '../utils/audioSampler';
 
-const videoConstraints = {
-    width: 400,
-    height: 500,
-    facingMode: "user"
-  };
+
 
 export default function VideoCapture({stopWebcam}) {
     const webcamRef = useRef(null);
+    const [currFacingMode, setCurrFacingMode] = useState("user");
     const [analyzingColor, setAnalyzingColor] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
     const [readyToAnalyze, setReadyToAnalyze] = useState(false);
@@ -61,6 +60,12 @@ export default function VideoCapture({stopWebcam}) {
         setrgbaValue(avgRgbValue);
     };
 
+    const videoConstraints = {
+        width: 400,
+        height: 500,
+        facingMode: currFacingMode
+      };
+
     const record = async () => {
         setAnalyzingColor(true);
         const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
@@ -87,6 +92,14 @@ export default function VideoCapture({stopWebcam}) {
         )
     }
 
+    const flipCamera = () => {
+        if (currFacingMode === "user") {
+            setCurrFacingMode({exact:"environment"})
+        } else {
+            setCurrFacingMode("user")
+        }
+    }
+
     return (
         <Container centerContent>
           {readyToAnalyze &&
@@ -100,13 +113,21 @@ export default function VideoCapture({stopWebcam}) {
                 onClick={()=> endSession()} icon={<CloseIcon/>}/>
           </Flex>
           }
-            <Box maxW={400} maxH={450} borderRadius={10} boxShadow={readyToAnalyze ? `0px 0px 18px ${getRgbaString()}` : null} overflow="hidden">
+            <Box position="relative" maxW={400} maxH={450} borderRadius={10} boxShadow={readyToAnalyze ? `0px 0px 18px ${getRgbaString()}` : null} overflow="hidden">
                 <Webcam 
                 videoConstraints={videoConstraints}
                 audio={false}
                 ref={webcamRef}
                 onUserMedia={() => setReadyToAnalyze(true)}
                 />
+                <IconButton 
+                    position="absolute" 
+                    variant="ghost" 
+                    icon={<Icon as={IoMdReverseCamera} w={10} h={10} color="white" opacity={0.8}/>}
+                    right={5}
+                    bottom={5}
+                    onClick={() => flipCamera()}
+                    />
             </Box>
         {readyToAnalyze ?
         <Container centerContent>
