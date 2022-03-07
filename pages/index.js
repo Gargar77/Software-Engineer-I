@@ -19,20 +19,43 @@ const definitionInfo = {
   }
 }
 
-
 const InstructionsInfo = {
   title:"Instructions",
   body:<Text>when you click <StyledButton disabled color="black">Analyze</StyledButton> the program will capture your video, and tranform it into an audible tone. Feel free to play around by showing the camera different colors and hear how the sound changes!</Text>
 }
+const ERROR_TYPES = {
+  webcam: {
+    title:"Can't find Camera", 
+    message:"Looks like there is no camera connected. Refresh the page and try again."
+  },
+  unknown: {
+    title: "unknown Error",
+    message: "an Unkown error occurred"
+  }
+}
+
 
 export default function Home() {
   const [isRecording,setIsRecording] = useState(false);
+
+  const handleError = (type) => {
+    switch(type) {
+      case "webcam":
+        window.alert(ERROR_TYPES.webcam.message)
+        break;
+      default:
+        window.alert(ERROR_TYPES.unknown.message)
+        break;
+    }
+  };
+
   return (
     <div>
       <Head>
         <title>Synesthesia</title>
         <meta name="description" content="synethesia simulator" />
       </Head>
+      {/* <ErrorModal error={currError} removeError={setcurrError}/> */}
       <Box position="absolute" padding={isRecording ? 10 : 4} transition='padding 300ms ease-out' zIndex={2}>
       <InfoPopOver 
         config={isRecording ? InstructionsInfo : definitionInfo}  
@@ -59,7 +82,12 @@ export default function Home() {
       <main style={{height:'80vh', marginBottom:18}}>
         {isRecording ?
           <Container centerContent marginBottom={10}>
-            <Box maxW={400} maxH={300}><SynesthesiaSimulator stopWebcam={() => setIsRecording(false)}/></Box>
+            <Box maxW={400} maxH={300}>
+              <SynesthesiaSimulator 
+                stopWebcam={() => setIsRecording(false)}
+                logErrorType={(errorType) => handleError(errorType)}
+                />
+            </Box>
           </Container>
           :
           <Container centerContent marginBottom={50}>

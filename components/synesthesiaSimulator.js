@@ -23,7 +23,7 @@ import { startAudio } from '../utils/audioSampler';
 
 
 
-export default function VideoCapture({stopWebcam}) {
+export default function VideoCapture({stopWebcam, logErrorType}) {
     const webcamRef = useRef(null);
     const [currFacingMode, setCurrFacingMode] = useState("user");
     const [analyzingColor, setAnalyzingColor] = useState(false);
@@ -109,6 +109,10 @@ export default function VideoCapture({stopWebcam}) {
                 audio={false}
                 ref={webcamRef}
                 onUserMedia={() => setReadyToAnalyze(true)}
+                onUserMediaError={() => {
+                    endSession();
+                    logErrorType("webcam");
+                } }
                 />
                 {readyToAnalyze && 
                     <IconButton 
