@@ -1,5 +1,6 @@
 # Synesthesia
-  A simulator that lets you hear colors
+  A simulator that lets you hear colors. I came up with this Idea after listening to a [TED talk](https://www.ted.com/talks/neil_harbisson_i_listen_to_color?language=en) by Neil Harbisson, and wanted to explore how I would be able to accomplish that in a web app. 
+  
 ## Table of contents
 
 - [Overview](#overview)
