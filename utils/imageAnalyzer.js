@@ -15,10 +15,21 @@ const imageDataScraper = (bitmap) => {
     return frame
 }
 
- const getImageData = async (imageCapture) => {
+export const fallbackGetImageData = (video) => {
+  const { videoWidth, videoHeight } = video;
+  console.log(videoHeight, videoWidth)
+  const canvas = document.createElement('canvas');
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+  const context = canvas.getContext('2d');
+  context.drawImage(video, 0, 0, videoWidth, videoHeight);
+  let frame = video ? context.getImageData(0, 0, videoWidth, videoHeight) : null;
+  return frame?.data;
+}
+
+ export const getImageData = async (imageCapture) => {
   let imageBitmap = await getImageBitmap(imageCapture);
   return imageDataScraper(imageBitmap).data;
 }
 
-export default getImageData
 
