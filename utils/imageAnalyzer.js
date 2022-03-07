@@ -17,7 +17,6 @@ const imageDataScraper = (bitmap) => {
 
 export const fallbackGetImageData = (video) => {
   const { videoWidth, videoHeight } = video;
-  console.log(videoHeight, videoWidth)
   const canvas = document.createElement('canvas');
   canvas.width = videoWidth;
   canvas.height = videoHeight;
