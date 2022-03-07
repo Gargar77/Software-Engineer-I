@@ -54,6 +54,7 @@ export default function Home() {
       <Head>
         <title>Synesthesia</title>
         <meta name="description" content="synethesia simulator" />
+        <meta name="piña colada" content="I found a secret 😉"/>
       </Head>
       {/* <ErrorModal error={currError} removeError={setcurrError}/> */}
       <Box position="absolute" padding={isRecording ? 10 : 4} transition='padding 300ms ease-out' zIndex={2}>
