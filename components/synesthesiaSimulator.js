@@ -93,6 +93,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
     }
 
     const flipCamera = () => {
+        stopRecord();
         if (currFacingMode === "user") {
             setCurrFacingMode({exact:"environment"})
         } else {
