@@ -1,4 +1,4 @@
-# Galleria slideshow site
+# Synesthesia
 
 ## Table of contents
 
