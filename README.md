@@ -31,6 +31,8 @@
 
 - Live Site URL: [https://synesthesia-fdb51.firebaseapp.com/]
 
+NOTE: if link is not working, you may also clone this repo, run `npm install`, and run `npm run dev` to see the dev version.
+
 ## My process
   The main challenge in this project was to implement a way to take a webcam feed, and convert it into an audible tone
   
