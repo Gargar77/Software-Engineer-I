@@ -17,7 +17,7 @@ import {
 import StyledButton from './styledButton'
 
 import Webcam from  'react-webcam'
-import getImageData from '../utils/imageAnalyzer'
+import {getImageData, fallbackGetImageData} from '../utils/imageAnalyzer'
 import {getAvgRGBAValue, convertRgbToFrequency} from '../utils/colorAnalyzer';
 import { startAudio } from '../utils/audioSampler';
 
@@ -60,6 +60,13 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
         setrgbaValue(avgRgbValue);
     };
 
+    const fallbackAnalyzeVideoFrame = async (video) => {
+        
+        let imageData = await fallbackGetImageData(video);
+        let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
+        setrgbaValue(avgRgbValue);
+    }
+
     const videoConstraints = {
         width: 400,
         height: 500,
@@ -68,11 +75,15 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
 
     const record = async () => {
         setAnalyzingColor(true);
-        const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
-        const imageCapture = new ImageCapture(mediaStreamTrack);
-        let id = setInterval(() => analyzeVideoFrame(imageCapture, ()=> brightnessThreshold), 100);
+        let id;
+        if ('ImageCapture' in window) {
+            const mediaStreamTrack = webcamRef.current.stream.getVideoTracks()[0];
+            const imageCapture = new ImageCapture(mediaStreamTrack);
+            id = setInterval(() => analyzeVideoFrame(imageCapture, ()=> brightnessThreshold), 100);
+        } else {
+            id = setInterval(() => fallbackAnalyzeVideoFrame(webcamRef.current.video), 100)
+        }
         setIntervalId(id);
-
     };
     const stopRecord = async () => {
         audioSource && await audioSource.stop();
