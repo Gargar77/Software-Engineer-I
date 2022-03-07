@@ -14,8 +14,9 @@ import {
 
 const infoPopOver = (props) => (
     <Popover {...props}>
-        <PopoverTrigger>
+        <PopoverTrigger >
           <IconButton 
+            _hover={{background:'none'}}
             size="lg" 
             variant="ghost" 
             icon={props.infoIcon}
