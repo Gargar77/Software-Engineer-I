@@ -1,5 +1,5 @@
 # Synesthesia
-
+  A simulator that lets you hear colors
 ## Table of contents
 
 - [Overview](#overview)
