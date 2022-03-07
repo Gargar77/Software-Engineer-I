@@ -122,6 +122,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
                         top={4} 
                         right={5}
                         opacity={0.8}
+                        _hover={{background:'none'}}
                         aria-label='stop video'
                         onClick={()=> endSession()} icon={<CloseIcon/>}/>
                 }
@@ -132,6 +133,8 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
                         icon={<Icon as={IoMdReverseCamera} w={10} h={10} color="white" opacity={0.8}/>}
                         right={5}
                         bottom={5}
+                        _hover={{background:'none'}}
+                        aria-label='switch cameras'
                         onClick={() => flipCamera()}/>
                 }
             </Box>
