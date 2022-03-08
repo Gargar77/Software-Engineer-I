@@ -77,7 +77,3 @@ currently I am using a lumincance method of converting color into sound, but I w
 
 ## Author
 - Website - [Gary Bautista](https://garybautista.me/)
-
-
-
-secret: piña colada
