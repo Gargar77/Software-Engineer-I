@@ -32,7 +32,7 @@
 
 - Live Site URL: [https://synesthesia-fdb51.firebaseapp.com/]
 
-NOTE: if link is not working, you may also clone this repo, run `npm install`, and run `npm run dev` to see the dev version.
+NOTE: If link is not working, you may also clone this repo, run `npm install`, and run `npm run dev` to see the dev version.
 
 ## My process
   The main challenge in this project was to implement a way to take a webcam feed, and convert it into an audible tone
@@ -73,7 +73,7 @@ The styling was made possible with Chakra UI components and Freepik graphics
 ### Continued development
  Currently, the program emits a single Oscillator Node with varying frequency. My next steps would be to learn more about the different audio nodes and how to build an audio graph, whcih would allow me to create a more complex sound.
  
-currently I am using a lumincance method of xonverting color into sound, but I would also like to look into a different method of converting the RGB value into a tone.
+currently I am using a lumincance method of converting color into sound, but I would also like to look into a different method of converting the RGB value into a tone.
 
 ## Author
 - Website - [Gary Bautista](https://garybautista.me/)
