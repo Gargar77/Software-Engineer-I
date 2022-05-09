@@ -66,7 +66,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
         let imageData = await fallbackGetImageData(video);
         let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
         setrgbaValue(avgRgbValue);
-    }
+    };
 
     const videoConstraints = {
         width: 400,
@@ -86,24 +86,24 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
         }
         setIntervalId(id);
     };
-    
+
     const stopRecord = async () => {
         audioSource && await audioSource.stop();
         clearInterval(intervalId);
         setIntervalId(null);
         setAnalyzingColor(false);
-    }
+    };
 
     const endSession = () => {
         stopRecord();
         stopWebcam();
-    }
+    };
 
     const getRgbaString = () => {
         return (
             `rgb(${rgbaValue[0]},${rgbaValue[1]},${rgbaValue[2]})`
         )
-    }
+    };
 
     const flipCamera = () => {
         stopRecord();
@@ -112,7 +112,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
         } else {
             setCurrFacingMode("user")
         }
-    }
+    };
 
     return (
         <Container centerContent>
