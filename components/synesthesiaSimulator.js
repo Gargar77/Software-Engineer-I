@@ -54,6 +54,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
             setAudioSource(null)
         }
     })
+
     const analyzeVideoFrame = async (imageCapture) => {
         let imageData = await getImageData(imageCapture);
         let avgRgbValue = getAvgRGBAValue(imageData, thresholdRef.current);
@@ -85,6 +86,7 @@ export default function VideoCapture({stopWebcam, logErrorType}) {
         }
         setIntervalId(id);
     };
+    
     const stopRecord = async () => {
         audioSource && await audioSource.stop();
         clearInterval(intervalId);
